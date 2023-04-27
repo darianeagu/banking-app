@@ -14,7 +14,6 @@ public class DataSource {
 
     try {
       connection = DriverManager.getConnection(db_file);
-      System.out.println("we're connected");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -70,11 +69,20 @@ public class DataSource {
 
   }
 
-  // Testing connection
+  public static void updateAccountBalance(int accountId, double balance){
+    String sql = "UPDATE accounts SET balance = ? WHERE id = ?";
+    try(
+      Connection connection = connect();
+      PreparedStatement statement = connection.prepareStatement(sql);
+    ){
 
-  public static void main(String[] args) {
-    Customer customer = getCustomer("twest8o@friendfeed.com");
-    Account account = getAccount(customer.getAccountId());
-    System.out.println(account.getBalance());
+      statement.setDouble(1, balance);
+      statement.setInt(2, accountId);
+
+      statement.executeUpdate();
+      
+    }catch(SQLException e){
+      e.printStackTrace();
+    }
   }
 }
