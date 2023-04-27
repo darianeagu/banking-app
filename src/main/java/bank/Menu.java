@@ -12,7 +12,7 @@ public class Menu {
     Menu menu = new Menu();
     menu.scanner = new Scanner(System.in);
 
-    Customer customer = menu.authenticateUser()
+    Customer customer = menu.authenticateUser();
     if(customer != null) {
       Account account = DataSource.getAccount(customer.getAccountId());
       menu.showMenu(customer, account);
@@ -57,13 +57,13 @@ public class Menu {
 
       switch(selection) {
         case 1:
-        System.out.println("How much would you like to deposit?")
+        System.out.println("How much would you like to deposit?");
         amount = scanner.nextDouble();
         account.deposit(amount);
         break;
 
         case 2:
-        System.out.println("How much would you like to withdraw?")
+        System.out.println("How much would you like to withdraw?");
         amount = scanner.nextDouble();
         account.withdraw(amount);
         break;
